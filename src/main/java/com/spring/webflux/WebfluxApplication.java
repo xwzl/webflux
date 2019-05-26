@@ -3,11 +3,15 @@ package com.spring.webflux;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
+/**
+ *
+ * @author xuweizhi
+ */
 @SpringBootApplication
-public class WebflexApplication {
+public class WebfluxApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(WebflexApplication.class, args);
+        SpringApplication.run(WebfluxApplication.class, args);
     }
 
 }
