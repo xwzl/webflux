@@ -1,5 +1,7 @@
 package com.spring.webflux.domain;
 
+import org.springframework.data.annotation.Id;
+
 /**
  * @author xuweizhi
  * @since 2019/05/26 11:51
@@ -9,6 +11,7 @@ public class City {
     /**
      * 城市编号
      */
+    @Id
     private Long id;
 
     /**

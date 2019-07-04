@@ -24,7 +24,8 @@ configurations {
 
 dependencies {
     compile(
-            "org.jetbrains:annotations:17.0.0"
+            "org.jetbrains:annotations:17.0.0",
+            "org.springframework.boot:spring-boot-starter-data-mongodb-reactive"
     )
     compileOnly 'org.projectlombok:lombok'
     annotationProcessor 'org.projectlombok:lombok'

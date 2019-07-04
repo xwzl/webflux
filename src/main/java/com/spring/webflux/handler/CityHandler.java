@@ -1,8 +1,7 @@
 package com.spring.webflux.handler;
 
 import com.spring.webflux.domain.City;
-import com.spring.webflux.reposity.CityRepository;
-import org.jetbrains.annotations.Contract;
+import com.spring.webflux.repository.CityRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import reactor.core.publisher.Flux;
@@ -16,16 +15,16 @@ import reactor.core.publisher.Mono;
  */
 @Component
 public class CityHandler {
-    private final CityRepository cityRepository;
-
-    /**
-     * 构造注入
-     */
-    @Contract(pure = true)
-    @Autowired
-    public CityHandler(CityRepository cityRepository) {
-        this.cityRepository = cityRepository;
-    }
+    //private final CityRepository cityRepository;
+    //
+    ///**
+    // * 构造注入
+    // */
+    //@Contract(pure = true)
+    //@Autowired
+    //public CityHandler(CityRepository cityRepository) {
+    //    this.cityRepository = cityRepository;
+    //}
 
     /**
      * 从返回值可以看出，Mono 和 Flux 适用于两个场景，即：
@@ -39,27 +38,61 @@ public class CityHandler {
     //            .body(BodyInserters.fromObject("Hello, City!"));
     //}
 
-    public Mono<Long> save(City city) {
-        return Mono.create(
-                cityMonoSink ->
-                        cityMonoSink.success(cityRepository.save(city))
-        );
+    //public Mono<Long> save(City city) {
+    //    return Mono.create(
+    //            cityMonoSink ->
+    //                    cityMonoSink.success(cityRepository.save(city))
+    //    );
+    //}
+    //
+    //public Mono<City> findCityById(Long id) {
+    //    return Mono.justOrEmpty(cityRepository.findCityById(id));
+    //}
+    //
+    //public Flux<City> findAllCity() {
+    //    return Flux.fromIterable(cityRepository.findAll());
+    //}
+    //
+    //public Mono<Long> modifyCity(City city) {
+    //    return Mono.create(cityMonoSink -> cityMonoSink.success(cityRepository.updateCity(city)));
+    //}
+    //
+    //public Mono<Long> deleteCity(Long id) {
+    //    return Mono.create(cityMonoSink -> cityMonoSink.success(cityRepository.deleteCity(id)));
+    //}
+    //
+    //
+    //public Mono<City> save(City city) {
+    //    return cityRepository.save(city);
+    //}
+
+    private final CityRepository cityRepository;
+
+    @Autowired
+    public CityHandler(CityRepository cityRepository) {
+        this.cityRepository = cityRepository;
+    }
+
+    public Mono<City> save(City city) {
+        return cityRepository.save(city);
     }
 
     public Mono<City> findCityById(Long id) {
-        return Mono.justOrEmpty(cityRepository.findCityById(id));
+        return cityRepository.findById(id);
     }
 
     public Flux<City> findAllCity() {
-        return Flux.fromIterable(cityRepository.findAll());
+        return cityRepository.findAll();
     }
 
-    public Mono<Long> modifyCity(City city) {
-        return Mono.create(cityMonoSink -> cityMonoSink.success(cityRepository.updateCity(city)));
+    public Mono<City> modifyCity(City city) {
+
+        return cityRepository.save(city);
     }
 
     public Mono<Long> deleteCity(Long id) {
-        return Mono.create(cityMonoSink -> cityMonoSink.success(cityRepository.deleteCity(id)));
+        cityRepository.deleteById(id);
+        return Mono.create(cityMonoSink -> cityMonoSink.success(id));
     }
 
 }

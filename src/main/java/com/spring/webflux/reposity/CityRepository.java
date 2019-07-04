@@ -2,7 +2,6 @@ package com.spring.webflux.reposity;
 
 import com.spring.webflux.domain.City;
 import org.jetbrains.annotations.NotNull;
-import org.springframework.stereotype.Repository;
 
 import java.util.Collection;
 import java.util.concurrent.ConcurrentHashMap;
@@ -18,7 +17,7 @@ import java.util.concurrent.atomic.AtomicLong;
  * @author xuweizhi
  * @since 2019/05/26 11:52
  */
-@Repository
+//@Repository
 public class CityRepository {
 
     private ConcurrentMap<Long, City> repository = new ConcurrentHashMap<>();
